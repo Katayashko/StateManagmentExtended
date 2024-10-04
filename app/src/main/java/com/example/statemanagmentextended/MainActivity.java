@@ -18,8 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-    private CountViewModel countViewModel;
-
+    private StateViewModel StateViewModel;
     private TextView hiddenTextView;
     private TextView textViewCount;
     private int count = 0;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         switcher = findViewById(R.id.switcher);
         checkBox = findViewById(R.id.checkBox);
         Button buttontIncrement = findViewById(R.id.buttonIncrement);
-        countViewModel = new ViewModelProvider(this).get(CountViewModel.class);
+        StateViewModel = new ViewModelProvider(this).get(StateViewModel.class);
 
         updateCountText();
         updateState();
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         buttontIncrement.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                countViewModel.incrementCount();
+                StateViewModel.incrementCount();
                 updateCountText();
             }
         });
@@ -65,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
         checkBox.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 if (checkBox.isChecked()) {
-                    countViewModel.stateOn();
+                    StateViewModel.stateCBOn();
                     updateState();
                 } else {
-                    countViewModel.stateOff();
+                    StateViewModel.stateCBOff();
                     updateState();
                 }
             }
@@ -77,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateCountText() {
-        textViewCount.setText("Licznik: " + countViewModel.getcount());
+        textViewCount.setText("Licznik: " + StateViewModel.getcount());
     }
     private void updateState(){
-        if (countViewModel.getState()) {
+        if (StateViewModel.getStateCB()) {
             hiddenTextView.setVisibility(View.VISIBLE);
         } else {
             hiddenTextView.setVisibility(View.INVISIBLE);

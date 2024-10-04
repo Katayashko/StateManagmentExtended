@@ -30,7 +30,7 @@
         android:layout_gravity="center"
         android:id="@+id/editTextInp"
         android:textSize="18sp"
-        android:text="Wpisz tu text"
+        android:hint="Wpisz tu text"
         />
 
     <CheckBox
