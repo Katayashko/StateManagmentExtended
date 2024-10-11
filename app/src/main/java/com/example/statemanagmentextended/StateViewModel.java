@@ -30,11 +30,13 @@ public class StateViewModel extends ViewModel{
         return stanCB;
     }
 
+
+
     public void updateEditText(String text){
         tekst = text;
     }
 
-    public String getEditText(){
+    public String setEditText(){
         return tekst;
     }
 

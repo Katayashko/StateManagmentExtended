@@ -10,12 +10,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private StateViewModel StateViewModel;
@@ -24,6 +19,23 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextInp;
     private Switch switcher;
     private CheckBox checkBox;
+    private TextView testView;
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setEditText();
+        updateEditText();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        setEditText();
+        updateEditText();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        testView = findViewById(R.id.testView);
         hiddenTextView = findViewById(R.id.hiddenTextView);
         textViewCount = findViewById(R.id.textViewCount);
         switcher = findViewById(R.id.switcher);
@@ -43,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
         updateCountText();
         updateState();
         updateMode();
-        updateEditText();
-        getEditText();
+        setEditText();
 
 
         buttontIncrement.setOnClickListener(new View.OnClickListener(){
@@ -85,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
         StateViewModel.updateEditText(editTextInp.getText().toString());
     }
 
-    private void getEditText(){
-        StateViewModel.getEditText();
+    private void setEditText(){
+        testView.setText(StateViewModel.setEditText());
     }
 
     private void updateCountText() {
