@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private StateViewModel StateViewModel;
     private TextView hiddenTextView;
     private TextView textViewCount;
-    private int count = 0;
     private EditText editTextInp;
     private Switch switcher;
     private CheckBox checkBox;
@@ -37,10 +36,16 @@ public class MainActivity extends AppCompatActivity {
         switcher = findViewById(R.id.switcher);
         checkBox = findViewById(R.id.checkBox);
         Button buttontIncrement = findViewById(R.id.buttonIncrement);
+        editTextInp = findViewById(R.id.editTextInp);
         StateViewModel = new ViewModelProvider(this).get(StateViewModel.class);
+
 
         updateCountText();
         updateState();
+        updateMode();
+        updateEditText();
+        getEditText();
+
 
         buttontIncrement.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -54,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (switcher.isChecked()) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    StateViewModel.stateSOn();
+                    updateMode();
                 } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    StateViewModel.stateSOff();
+                    updateMode();
                 }
             }
         });
@@ -72,7 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    private void updateEditText(){
+        StateViewModel.updateEditText(editTextInp.getText().toString());
+    }
+
+    private void getEditText(){
+        StateViewModel.getEditText();
     }
 
     private void updateCountText() {
@@ -83,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             hiddenTextView.setVisibility(View.VISIBLE);
         } else {
             hiddenTextView.setVisibility(View.INVISIBLE);
+        }
+    }
+    private void updateMode(){
+        if (StateViewModel.getStateS()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 }

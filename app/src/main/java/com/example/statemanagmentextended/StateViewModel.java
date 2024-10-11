@@ -6,7 +6,7 @@ public class StateViewModel extends ViewModel{
     int licznik = 0;
     String tekst;
     boolean stanCB;
-    boolean stanS;
+    boolean stateS;
 
     public int getcount(){
         return licznik;
@@ -15,6 +15,8 @@ public class StateViewModel extends ViewModel{
     public void incrementCount(){
         licznik++;
     }
+
+
 
     public void stateCBOn(){
         stanCB = true;
@@ -28,4 +30,25 @@ public class StateViewModel extends ViewModel{
         return stanCB;
     }
 
+    public void updateEditText(String text){
+        tekst = text;
+    }
+
+    public String getEditText(){
+        return tekst;
+    }
+
+
+
+    public void stateSOn(){
+        stateS = true;
+    }
+
+    public void stateSOff(){
+        stateS = false;
+    }
+
+    public boolean getStateS() {
+        return stateS;
+    }
 }
